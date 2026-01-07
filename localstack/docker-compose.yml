@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: instagram-localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,dynamodb,lambda,apigateway,iam,logs,secretsmanager,cloudwatchlogs
+      - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - LAMBDA_EXECUTOR=local
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+    volumes:
+      - "./localstack-data:/var/lib/localstack"
+      - "./init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh"
+      - "../lambda_function.zip:/tmp/lambda_function.zip"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - instagram-network
+    
+
+networks:
+  instagram-network:
+    driver: bridge
+    external: false
