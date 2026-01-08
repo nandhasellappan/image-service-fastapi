@@ -97,8 +97,7 @@ Access the interactive API documentation at: **http://localhost:8000/docs**
 
 ### Authentication
 Requests to sensitive endpoints (like Bulk Delete) require authentication.
-- **Header**: `x-api-key: <user_id>:<api_token>`
-- **Default Local Token**: `6f0ced3f-5028-4b1c-8294-3d894c48c645`
+- **Header**: `x-api-key:<api_token>`
 
 ### Key Endpoints
 
